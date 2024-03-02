@@ -10,8 +10,8 @@ type Schedule struct {
 	Name       string `gorm:"type:varchar;size:255;not null"`           // Task Name
 	Expression string `gorm:"type:varchar;size:255;not null"`           // Cron Expression
 
-	Created int64 `gorm:"autoCreateTime"`
-	Updated int64 `gorm:"autoUpdateTime"`
+	Created int64 `gorm:"autoCreateTime:milli"`
+	Updated int64 `gorm:"autoUpdateTime:milli"`
 }
 
 func (s *Schedule) BeforeCreate(tx *gorm.DB) (err error) {

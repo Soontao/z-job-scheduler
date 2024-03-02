@@ -1,12 +1,23 @@
 package apis
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"fornever.org/app/model"
+	"github.com/gin-gonic/gin"
+)
 
 func JobAPIs(group *gin.RouterGroup, c *APIBootstrapContext) {
-	group.GET("/task", func(ctx *gin.Context) {
-
+	group.GET("/tasks", func(ctx *gin.Context) {
+		var tasks []model.Task
+		// TODO: limit, order by ....
+		c.DB.Find(&tasks)
+		ctx.JSON(http.StatusOK, gin.H{"results": tasks})
 	})
-	group.POST("/task", func(ctx *gin.Context) {
-
+	group.POST("/tasks", func(ctx *gin.Context) {
+		var payload model.Task
+		ctx.BindJSON(&payload)
+		c.DB.Save(&payload)
+		ctx.JSON(http.StatusAccepted, gin.H{"results": payload})
 	})
 }

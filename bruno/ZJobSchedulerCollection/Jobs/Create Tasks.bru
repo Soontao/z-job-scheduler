@@ -1,0 +1,17 @@
+meta {
+  name: Create Tasks
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{host}}/jobs/tasks
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "Name": "example 1"
+  }
+}
