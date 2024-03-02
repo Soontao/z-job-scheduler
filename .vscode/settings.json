@@ -3,6 +3,7 @@
   "cSpell.enabled": false,
   "editor.wordWrap": "on",
   "go.useLanguageServer": true,
+  "editor.fontSize": 12,
   "[go]": {
     "editor.snippetSuggestions": "none",
     "editor.formatOnSave": true,

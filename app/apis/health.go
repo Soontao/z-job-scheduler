@@ -7,7 +7,7 @@ import (
 )
 
 func HealthAPIs(group *gin.RouterGroup, c *APIBootstrapContext) {
-	group.Any("/", func(ctx *gin.Context) {
+	group.Any("", func(ctx *gin.Context) {
 		ctx.JSON(
 			http.StatusOK,
 			gin.H{
