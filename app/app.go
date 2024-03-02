@@ -29,7 +29,12 @@ func CreateApp(param *param.WebAppParam) *WebApplication {
 		app.db, _ = gorm.Open(postgres.Open(param.PgDsn), &gorm.Config{})
 	}
 
-	_ = app.db.AutoMigrate(&model.Schedule{}, &model.Task{})
+	_ = app.db.AutoMigrate(
+		&model.Schedule{},
+		&model.Task{},
+		&model.Execution{},
+		&model.ExecutionLog{},
+	)
 	app.mount()
 	return app
 }
