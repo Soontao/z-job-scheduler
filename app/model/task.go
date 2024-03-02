@@ -5,7 +5,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// task definition
+// Task Definition
 type Task struct {
 	ID   string `gorm:"primaryKey;type:varchar;size:36;not null"` // UUID
 	Name string `gorm:"type:varchar;size:255;not null"`           // Task Name
