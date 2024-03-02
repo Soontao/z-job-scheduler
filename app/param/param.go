@@ -1,4 +1,4 @@
-package app
+package param
 
 type WebAppParam struct {
 	Flag1       bool

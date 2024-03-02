@@ -2,6 +2,7 @@ package main
 
 import (
 	"fornever.org/app"
+	"fornever.org/app/param"
 	"github.com/urfave/cli"
 )
 
@@ -35,7 +36,7 @@ var commandEntry = cli.Command{
 
 func entry(c *cli.Context) error {
 
-	inst := app.CreateApp(&app.WebAppParam{
+	inst := app.CreateApp(&param.WebAppParam{
 		ServiceName: AppName,
 		Version:     Version,
 		Flag1:       false,

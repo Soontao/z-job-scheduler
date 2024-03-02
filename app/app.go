@@ -1,7 +1,9 @@
 package app
 
 import (
+	"fornever.org/app/apis"
 	"fornever.org/app/model"
+	"fornever.org/app/param"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
@@ -10,37 +12,41 @@ import (
 )
 
 // CreateApp but not run
-func CreateApp(param *WebAppParam) *WebApplication {
+func CreateApp(param *param.WebAppParam) *WebApplication {
 	engine := gin.Default()
 	app := &WebApplication{
 		param:  param,
 		engine: engine,
 	}
-	var db *gorm.DB
 
 	if len(param.SqliteDsn) > 0 {
-		db, _ = gorm.Open(sqlite.Open(param.SqliteDsn), &gorm.Config{})
+		app.db, _ = gorm.Open(sqlite.Open(param.SqliteDsn), &gorm.Config{})
 	}
 	if len(param.MysqlDsn) > 0 {
-		db, _ = gorm.Open(mysql.Open(param.MysqlDsn), &gorm.Config{})
+		app.db, _ = gorm.Open(mysql.Open(param.MysqlDsn), &gorm.Config{})
 	}
 	if len(param.PgDsn) > 0 {
-		db, _ = gorm.Open(postgres.Open(param.PgDsn), &gorm.Config{})
+		app.db, _ = gorm.Open(postgres.Open(param.PgDsn), &gorm.Config{})
 	}
 
-	_ = db.AutoMigrate(&model.Schedule{}, &model.Task{})
+	_ = app.db.AutoMigrate(&model.Schedule{}, &model.Task{})
 	app.mount()
 	return app
 }
 
 type WebApplication struct {
-	param  *WebAppParam
+	param  *param.WebAppParam
 	engine *gin.Engine
+	db     *gorm.DB
 }
 
 func (app *WebApplication) mount() {
-	app.engine.GET("/health", app.health)
-
+	ctx := &apis.APIBootstrapContext{
+		DB:       app.db,
+		AppParam: app.param,
+	}
+	apis.HealthAPIs(app.engine.Group("/health"), ctx)
+	apis.JobAPIs(app.engine.Group("/jobs"), ctx)
 }
 
 func (app *WebApplication) Run(addr string) error {
