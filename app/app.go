@@ -1,6 +1,13 @@
 package app
 
-import "github.com/gin-gonic/gin"
+import (
+	"fornever.org/app/model"
+	"github.com/gin-gonic/gin"
+	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
+)
 
 // CreateApp but not run
 func CreateApp(param *WebAppParam) *WebApplication {
@@ -9,6 +16,19 @@ func CreateApp(param *WebAppParam) *WebApplication {
 		param:  param,
 		engine: engine,
 	}
+	var db *gorm.DB
+
+	if len(param.SqliteDsn) > 0 {
+		db, _ = gorm.Open(sqlite.Open(param.SqliteDsn), &gorm.Config{})
+	}
+	if len(param.MysqlDsn) > 0 {
+		db, _ = gorm.Open(mysql.Open(param.MysqlDsn), &gorm.Config{})
+	}
+	if len(param.PgDsn) > 0 {
+		db, _ = gorm.Open(postgres.Open(param.PgDsn), &gorm.Config{})
+	}
+
+	_ = db.AutoMigrate(&model.Schedule{}, &model.Task{})
 	app.mount()
 	return app
 }

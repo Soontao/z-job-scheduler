@@ -23,6 +23,7 @@ main/main
 main/build
 main/*.zip
 main/output
+main/*.db
 
 # mac os
 .DS_Store

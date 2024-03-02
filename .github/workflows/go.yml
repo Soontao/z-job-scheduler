@@ -12,12 +12,12 @@ on:
 jobs:
   build:
     name: Build
-    
+
     strategy:
       max-parallel: 4
       matrix:
         os: [ubuntu-latest]
-        go-version: [1.21, 1.20]
+        go-version: ["1.22", "1.21"]
 
     runs-on: ${{ matrix.os }}
 
@@ -48,23 +48,23 @@ jobs:
       - name: Get appName
         id: appname
         uses: notiz-dev/github-action-json-property@release
-        with: 
-            path: 'app.json'
-            prop_path: 'appName'
+        with:
+          path: "app.json"
+          prop_path: "appName"
 
       - name: Get app description
         id: app-description
         uses: notiz-dev/github-action-json-property@release
-        with: 
-            path: 'app.json'
-            prop_path: 'appDescription'
+        with:
+          path: "app.json"
+          prop_path: "appDescription"
 
       - name: build
         working-directory: main
         run: bash build.sh
         env:
-          APPNAME: ${{steps.appname.outputs.prop}} 
-          APPDESCRIPTION: ${{steps.app-description.outputs.prop}} 
+          APPNAME: ${{steps.appname.outputs.prop}}
+          APPDESCRIPTION: ${{steps.app-description.outputs.prop}}
 
       - name: upload artifact
         uses: actions/upload-artifact@v4.3.1
