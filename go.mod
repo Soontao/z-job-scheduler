@@ -7,7 +7,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/stretchr/testify v1.9.0
 	github.com/takama/daemon v1.0.0
-	github.com/urfave/cli v1.22.14
+	github.com/urfave/cli/v2 v2.27.1
 	github.com/urfave/cli/v2 v2.27.1
 	gorm.io/driver/mysql v1.5.4
 	gorm.io/driver/postgres v1.5.6
