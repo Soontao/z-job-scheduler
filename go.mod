@@ -10,7 +10,7 @@ require (
 	github.com/urfave/cli v1.22.16
 	github.com/urfave/cli/v2 v2.27.5
 	gorm.io/driver/mysql v1.5.7
-	gorm.io/driver/postgres v1.5.10
+	gorm.io/driver/postgres v1.5.11
 	gorm.io/driver/sqlite v1.5.6
 	gorm.io/gorm v1.25.12
 )
