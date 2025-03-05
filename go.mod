@@ -8,7 +8,7 @@ require (
 	github.com/stretchr/testify v1.10.0
 	github.com/takama/daemon v1.0.0
 	github.com/urfave/cli v1.22.16
-	github.com/urfave/cli/v2 v2.27.5
+	github.com/urfave/cli/v2 v2.27.6
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/driver/postgres v1.5.11
 	gorm.io/driver/sqlite v1.5.7
