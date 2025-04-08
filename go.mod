@@ -1,6 +1,8 @@
 module fornever.org
 
-go 1.20
+go 1.22
+
+toolchain go1.24.2
 
 require (
 	github.com/gin-gonic/gin v1.10.0
@@ -9,6 +11,7 @@ require (
 	github.com/takama/daemon v1.0.0
 	github.com/urfave/cli v1.22.16
 	github.com/urfave/cli/v2 v2.27.6
+	github.com/urfave/cli/v3 v3.1.1
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/driver/postgres v1.5.11
 	gorm.io/driver/sqlite v1.5.7
