@@ -11,7 +11,6 @@ require (
 	github.com/takama/daemon v1.0.0
 	github.com/urfave/cli v1.22.16
 	github.com/urfave/cli/v3 v3.3.2
-	github.com/urfave/cli/v3 v3.3.2
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/driver/postgres v1.5.11
 	gorm.io/driver/sqlite v1.5.7
